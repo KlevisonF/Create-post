@@ -13,8 +13,8 @@ export function Comment(){
                             <strong>Klevison Ferreira</strong>
                             <time title='11 de Maio ás 08:13h' dateTime='2022-05-11 08:13:39'>P  há 1h</time>
                         </div>
-                        <button title='Deletar comentario'>
-                            <Trash size={20}/>
+                        <button  title='Deletar comentario'>
+                            <Trash size={24}/>
                         </button>
                     </header>
                     <p>Muito Bom Devon, Parabéns!!</p>
