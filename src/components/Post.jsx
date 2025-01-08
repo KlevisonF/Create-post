@@ -1,32 +1,35 @@
 import styles from './Post.module.css'
 import { Comment } from './Comment'
 import { Avatar } from './Avatar'
-export function Post() {
+import {format, formatDistanceToNow} from 'date-fns'
+import ptBr from 'date-fns/locale/pt-BR'
+
+export function Post({author, publishedAt, content}) {
+    const publishedDateFormat = format(publishedAt, "d 'de' LLLL 'ás' HH:mm'h'", {
+        locale: ptBr,
+    })
+
+    const publishedDateRelativeToNow = formatDistanceToNow(publishedAt,{
+        locale: ptBr,
+       addSuffix: true
+    })
+     
     return (
         <article className={styles.post}>
             <header>
                 <div className={styles.author}>
-                      <Avatar  src='https://github.com/KlevisonF.png' />
+                      <Avatar  src={author.avatarUrl} />
                     <div className={styles.authorInfo}>
-                        <strong>Klevison ferreira</strong>
-                        <span>Web Developer</span>
+                        <strong>{author.name}</strong>
+                        <span>{author.role}</span>
                     </div>
                 </div>
-                <time title='11 de Maio ás 08:13h' dateTime='2022-05-11 08:13:39'>Publicado há 1h</time>
+                <time title={publishedDateFormat} dateTime={publishedAt.toISOString()}>
+                    {publishedDateRelativeToNow}
+                </time>
             </header>
             <div className={styles.content}>
-                <p>
-                    <p> Fala galeraa 👋</p>
-
-                    <p> Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀</p>
-
-                    <p><a href='#'>jane.design/doctorcare</a></p>
-
-                    <p> <a href=''>#novoprojeto</a>
-                        <a href=''>#nlw</a>
-                        <a href=''> #rocketseat</a>
-                    </p>
-                </p>
+                {}
             </div>
             <form className={styles.commentForm}>
                 <strong>Deixe seu feedback</strong>
@@ -39,7 +42,7 @@ export function Post() {
                 </footer>
             </form>
             <div className={styles.commentList}>
-            <Comment />
+                <Comment />
                 <Comment />
                 <Comment />
                 <Comment />
